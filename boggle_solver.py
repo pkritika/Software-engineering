@@ -2,18 +2,14 @@ class Boggle:
   def __init__(self, grid, dictionary):
     #initialising the grid, dictionary and solution set
     self.grid = self.setGrid(grid)
-    # print(self.grid)
     self.dictionary = [word.upper() for word in dictionary]
-    #solution set consists of all the words that are in dictionary and matches the length
     self.solution=set() 
     self.N=len(grid)
-    if self.N == 0 or len(self.grid[0]) == 0:     # handling situation when the input grid is empty
+    if self.N == 0 or len(self.grid[0]) == 0:     
       self.visited = []
     else:
       self.visited=[[False for x in range(self.N)] for x in range(self.N)]     #keeping track of position already visited in grid
-    #creating a new hashmap that creates a key of all prefixes and the entire word 
     self.word_map = {}
-    #call the fucntion to populate the hashmap
     self.build_word_map(self.dictionary)
 
   def build_word_map(self, dictionary):
@@ -34,13 +30,6 @@ class Boggle:
     self.N = len(grid)
     return [[letter.upper() for letter in row] for row in grid]
   
-  def setDictionary(self,dictionary):
-    #setting the dictionary
-    self.dictionary=dictionary
-  
-  def setDictionary(self, dictionary):
-    self.word_map = {} 
-    self.build_word_map(dictionary)
   
   def is_valid(self, current_word):
     return len(current_word) >= 3 and self.word_map.get(current_word) == 1
@@ -60,14 +49,7 @@ class Boggle:
         if self.grid[i][j] == "Q" or self.grid[i][j] == "S":
           return []
         self.dfs(i,j,self.grid[i][j])
-    print(f"This is the grid {self.grid}")
-    print(f"This is the dictionary {self.dictionary}")
     return list(self.solution)
-    
-  
-  def isvalid(self,current_word):
-    # verifying if the word matches the condition to be added to the solution set
-    return len(current_word)>=3 and current_word in self.dictionary
 
   def dfs(self,i,j,current_word):
     #making sure the loop is inside the grid and the xurrnet index hasnt been visited
@@ -91,24 +73,9 @@ class Boggle:
       y = j + dc
       if 0 <= x < self.N and 0 <= y < self.N:
         self.dfs(x, y, current_word + self.grid[x][y])
-      # try:
-      #   self.dfs(x, y, current_word+self.grid[x][y])
-      # except:
-      #   continue
-      
-    #unmarks the visited cell
     self.visited[i][j] = False
 
-def main():
-    # grid = [["T", "W", "Y", "R"], 
-    #         ["E", "N", "P", "H"], 
-    #         ["G", "Z", "Qu", "R"], 
-    #         ["O", "N", "T", "A"]]
-    # dictionary = ["art", "ego", "gent", "get", "net", "new", "newt", "prat", "pry", "qua", "quart", "quartz", 
-    #               "rat", "tar", "tarp", "ten", "went", "wet", "arty", "not", "quar"]
-    # mygame = Boggle(grid, dictionary)
-    # print(sorted(mygame.getSolution()))
-    
+def main(): 
     grid = [['A', 'B', 'C', 'J', 'K', 'S'], 
             ['D', 'E', 'F', 'M', 'N', 'O'], 
             ['G', 'H', 'I', 'P', 'Q', 'R'], 
