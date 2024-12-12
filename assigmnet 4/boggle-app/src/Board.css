@@ -1,11 +1,11 @@
 .Board-div {
   width: 700px;
   margin: auto;
-  font-size: 40pt;
+  font-size: 50pt;
 }
 
 .Tile {
   text-align: center;
-  line-height: 50pt;
+  line-height: 40pt;
   vertical-align: middle;
 }
